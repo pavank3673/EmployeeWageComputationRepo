@@ -41,12 +41,30 @@ function employeeAttendence() {
   menuDisplay();
 }
 
+function employeeDailyWage() {
+  for (let employee of employeeList) {
+    if (employee.attendence == "Present") {
+      let fullDayHour = 8;
+      let wagePerHour = 20;
+      employee.wage = fullDayHour * wagePerHour;
+    } else {
+      employee.wage = 0;
+    }
+  }
+
+  menuDisplay();
+}
+
 function menuDisplay() {
   console.log("Welcome to Employee Wage Computation Program");
-  let choice = question("Display Menu :-\n 1) Check Employee Attendence \n");
+  let choice = question(
+    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n"
+  );
 
   if (choice == 1) {
     employeeAttendence();
+  } else if (choice == 2) {
+    employeeDailyWage();
   }
 }
 menuDisplay();
