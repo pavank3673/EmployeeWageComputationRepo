@@ -70,10 +70,39 @@ function addPartTimeEmployee() {
   menuDisplay();
 }
 
+function addPartTimeEmployeeSwitchCase() {
+  for (let employee of employeeList) {
+    let partTimeAttendence = Math.round(Math.random() * 2);
+    switch (partTimeAttendence) {
+      case 2:
+        employee.attendence = "Present Part Time";
+        let partTimeHour = 4;
+        let wagePerHourPartTime = 20;
+        employee.wage = partTimeHour * wagePerHourPartTime;
+
+        break;
+
+      case 1:
+        employee.attendence = "Present";
+        let fullDayHour = 8;
+        let wagePerHourFullTime = 20;
+        employee.wage = fullDayHour * wagePerHourFullTime;
+
+        break;
+
+      case 0:
+        employee.attendence = "Absent";
+        employee.wage = 0;
+    }
+  }
+
+  menuDisplay();
+}
+
 function menuDisplay() {
   console.log("Welcome to Employee Wage Computation Program");
   let choice = question(
-    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n"
+    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n 4) Add Part Time Employee and Wage Switch Case \n"
   );
 
   if (choice == 1) {
@@ -82,6 +111,8 @@ function menuDisplay() {
     employeeDailyWage();
   } else if (choice == 3) {
     addPartTimeEmployee();
+  } else if (choice == 4) {
+    addPartTimeEmployeeSwitchCase();
   }
 }
 menuDisplay();
