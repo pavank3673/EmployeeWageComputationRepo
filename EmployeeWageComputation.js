@@ -1,3 +1,5 @@
+import { question } from "readline-sync";
+
 let employeeList = [{}];
 
 employeeList[0] = {
@@ -30,6 +32,21 @@ employeeList[4] = {
   comp_name: "Comm",
 };
 
+function employeeAttendence() {
+  for (let employee of employeeList) {
+    let attendenceGenerator = Math.round(Math.random());
+    employee.attendence = attendenceGenerator == 1 ? "Present" : "Absent";
+  }
+
+  menuDisplay();
+}
+
 function menuDisplay() {
   console.log("Welcome to Employee Wage Computation Program");
+  let choice = question("Display Menu :-\n 1) Check Employee Attendence \n");
+
+  if (choice == 1) {
+    employeeAttendence();
+  }
 }
+menuDisplay();
