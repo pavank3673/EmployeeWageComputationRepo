@@ -55,16 +55,33 @@ function employeeDailyWage() {
   menuDisplay();
 }
 
+function addPartTimeEmployee() {
+  for (let employee of employeeList) {
+    let partTimeAttendence = Math.round(Math.random() * 2);
+    if (partTimeAttendence == 2) {
+      employee.attendence = "Present Part Time";
+
+      let partTimeHour = 4;
+      let wagePerHour = 20;
+      employee.wage = partTimeHour * wagePerHour;
+    }
+  }
+
+  menuDisplay();
+}
+
 function menuDisplay() {
   console.log("Welcome to Employee Wage Computation Program");
   let choice = question(
-    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n"
+    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n"
   );
 
   if (choice == 1) {
     employeeAttendence();
   } else if (choice == 2) {
     employeeDailyWage();
+  } else if (choice == 3) {
+    addPartTimeEmployee();
   }
 }
 menuDisplay();
