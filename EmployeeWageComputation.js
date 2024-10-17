@@ -99,10 +99,34 @@ function addPartTimeEmployeeSwitchCase() {
   menuDisplay();
 }
 
+function employeeWageForMonth() {
+  for (let employee of employeeList) {
+    let day = 0;
+    employee.monthWage = 0;
+    while (day < 20) {
+      let employeeAttendence = Math.round(Math.random() * 2);
+
+      if (employeeAttendence == 2) {
+        let partTimeHour = 4;
+        let wagePerHourPartTime = 20;
+        employee.monthWage += partTimeHour * wagePerHourPartTime;
+      } else if (employeeAttendence == 1) {
+        let fullDayHour = 8;
+        let wagePerHourFullTime = 20;
+        employee.monthWage += fullDayHour * wagePerHourFullTime;
+      } else if (employeeAttendence == 0) {
+        employee.monthWage += 0;
+      }
+      day++;
+    }
+  }
+  menuDisplay();
+}
+
 function menuDisplay() {
   console.log("Welcome to Employee Wage Computation Program");
   let choice = question(
-    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n 4) Add Part Time Employee and Wage Switch Case \n"
+    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n 4) Add Part Time Employee and Wage Switch Case \n 5) Calculate Wages for Month \n"
   );
 
   if (choice == 1) {
@@ -113,6 +137,8 @@ function menuDisplay() {
     addPartTimeEmployee();
   } else if (choice == 4) {
     addPartTimeEmployeeSwitchCase();
+  } else if (choice == 5) {
+    employeeWageForMonth();
   }
 }
 menuDisplay();
