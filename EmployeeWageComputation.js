@@ -103,6 +103,15 @@ class Employee {
       }
     }
   }
+
+  employeeWageMultipleCompanies(...companies) {
+    for (let company of companies) {
+      let companyWage = Math.round(Math.random() * (20 - 10) + 10);
+      let companyWorkingDays = Math.round(Math.random() * (25 - 20) + 20);
+      let companyWorkingHours = Math.round(Math.random() * (8 - 4) + 4);
+      company.wage = companyWage * companyWorkingDays * companyWorkingHours;
+    }
+  }
 }
 
 let employeeList = [{}];
@@ -111,7 +120,7 @@ employeeList[0] = new Employee(101, "sam", "Comm");
 employeeList[1] = new Employee(102, "adam", "Telmn");
 employeeList[2] = new Employee(103, "roger", "Comm");
 employeeList[3] = new Employee(104, "monte", "Telmn");
-employeeList[4] = new Employee(102, "kassing", "Comm");
+employeeList[4] = new Employee(105, "kassing", "Comm");
 
 for (let employee of employeeList) {
   employee.employeeAttendence();
@@ -121,3 +130,9 @@ for (let employee of employeeList) {
   employee.employeeWageForMonth();
   employee.employeeWageForMonthWithCondition();
 }
+
+let steve = new Employee(106, "steve", "Comm");
+steve.employeeWageMultipleCompanies(
+  { comp_name: "Comm" },
+  { comp_name: "Telmn" }
+);
