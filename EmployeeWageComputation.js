@@ -1,177 +1,123 @@
-import { question } from "readline-sync";
-
-let employeeList = [{}];
-
-employeeList[0] = {
-  emp_id: 101,
-  emp_name: "sam",
-  comp_name: "Comm",
-};
-
-employeeList[1] = {
-  emp_id: 102,
-  emp_name: "adam",
-  comp_name: "Telmn",
-};
-
-employeeList[2] = {
-  emp_id: 103,
-  emp_name: "roger",
-  comp_name: "Comm",
-};
-
-employeeList[3] = {
-  emp_id: 104,
-  emp_name: "monte",
-  comp_name: "Telmn",
-};
-
-employeeList[4] = {
-  emp_id: 106,
-  emp_name: "kassing",
-  comp_name: "Comm",
-};
-
-function employeeAttendence() {
-  for (let employee of employeeList) {
-    let attendenceGenerator = Math.round(Math.random());
-    employee.attendence = attendenceGenerator == 1 ? "Present" : "Absent";
+class Employee {
+  constructor(emp_id, emp_name, comp_name) {
+    this.emp_id = emp_id;
+    this.emp_name = emp_name;
+    this.comp_name = comp_name;
   }
 
-  menuDisplay();
-}
+  employeeAttendence() {
+    let attendenceGenerator = Math.round(Math.random());
+    this.attendence = attendenceGenerator == 1 ? "Present" : "Absent";
+  }
 
-function employeeDailyWage() {
-  for (let employee of employeeList) {
-    if (employee.attendence == "Present") {
+  employeeDailyWage() {
+    if (this.attendence == "Present") {
       let fullDayHour = 8;
       let wagePerHour = 20;
-      employee.wage = fullDayHour * wagePerHour;
+      this.wage = fullDayHour * wagePerHour;
     } else {
-      employee.wage = 0;
+      this.wage = 0;
     }
   }
 
-  menuDisplay();
-}
-
-function addPartTimeEmployee() {
-  for (let employee of employeeList) {
+  addPartTimeEmployee() {
     let partTimeAttendence = Math.round(Math.random() * 2);
     if (partTimeAttendence == 2) {
-      employee.attendence = "Present Part Time";
+      this.attendence = "Present Part Time";
 
       let partTimeHour = 4;
       let wagePerHour = 20;
-      employee.wage = partTimeHour * wagePerHour;
+      this.wage = partTimeHour * wagePerHour;
     }
   }
 
-  menuDisplay();
-}
-
-function addPartTimeEmployeeSwitchCase() {
-  for (let employee of employeeList) {
+  addPartTimeEmployeeSwitchCase() {
     let partTimeAttendence = Math.round(Math.random() * 2);
     switch (partTimeAttendence) {
       case 2:
-        employee.attendence = "Present Part Time";
+        this.attendence = "Present Part Time";
         let partTimeHour = 4;
         let wagePerHourPartTime = 20;
-        employee.wage = partTimeHour * wagePerHourPartTime;
+        this.wage = partTimeHour * wagePerHourPartTime;
 
         break;
 
       case 1:
-        employee.attendence = "Present";
+        this.attendence = "Present";
         let fullDayHour = 8;
         let wagePerHourFullTime = 20;
-        employee.wage = fullDayHour * wagePerHourFullTime;
+        this.wage = fullDayHour * wagePerHourFullTime;
 
         break;
 
       case 0:
-        employee.attendence = "Absent";
-        employee.wage = 0;
+        this.attendence = "Absent";
+        this.wage = 0;
     }
   }
 
-  menuDisplay();
-}
-
-function employeeWageForMonth() {
-  for (let employee of employeeList) {
+  employeeWageForMonth() {
     let day = 0;
-    employee.monthWage = 0;
+    this.monthWage = 0;
     while (day < 20) {
       let employeeAttendence = Math.round(Math.random() * 2);
 
       if (employeeAttendence == 2) {
         let partTimeHour = 4;
         let wagePerHourPartTime = 20;
-        employee.monthWage += partTimeHour * wagePerHourPartTime;
+        this.monthWage += partTimeHour * wagePerHourPartTime;
       } else if (employeeAttendence == 1) {
         let fullDayHour = 8;
         let wagePerHourFullTime = 20;
-        employee.monthWage += fullDayHour * wagePerHourFullTime;
+        this.monthWage += fullDayHour * wagePerHourFullTime;
       } else if (employeeAttendence == 0) {
-        employee.monthWage += 0;
+        this.monthWage += 0;
       }
       day++;
     }
   }
-  menuDisplay();
-}
 
-function employeeWageForMonthWithCondition() {
-  for (let employee of employeeList) {
+  employeeWageForMonthWithCondition() {
     let day = 0;
     let workingHour = 0;
-    employee.monthWage = 0;
+    this.monthWage = 0;
     while (day < 20 && workingHour < 100) {
       let employeeAttendence = Math.round(Math.random() * 2);
 
       if (employeeAttendence == 2) {
         let partTimeHour = 4;
         let wagePerHourPartTime = 20;
-        employee.monthWage += partTimeHour * wagePerHourPartTime;
+        this.monthWage += partTimeHour * wagePerHourPartTime;
         day++;
         workingHour += 4;
       } else if (employeeAttendence == 1) {
         let fullDayHour = 8;
         let wagePerHourFullTime = 20;
-        employee.monthWage += fullDayHour * wagePerHourFullTime;
+        this.monthWage += fullDayHour * wagePerHourFullTime;
         day++;
         workingHour += 8;
       } else if (employeeAttendence == 0) {
-        employee.monthWage += 0;
+        this.monthWage += 0;
         day++;
         workingHour += 0;
       }
     }
   }
-
-  menuDisplay();
 }
 
-function menuDisplay() {
-  console.log("Welcome to Employee Wage Computation Program");
-  let choice = question(
-    "Display Menu :-\n 1) Check Employee Attendence \n 2) Calculate Daily Employee Wage \n 3) Add Part Time Employee and Wage \n 4) Add Part Time Employee and Wage Switch Case \n 5) Calculate Wages for Month \n 6) Calculate Wages for Month with Condition \n"
-  );
+let employeeList = [{}];
 
-  if (choice == 1) {
-    employeeAttendence();
-  } else if (choice == 2) {
-    employeeDailyWage();
-  } else if (choice == 3) {
-    addPartTimeEmployee();
-  } else if (choice == 4) {
-    addPartTimeEmployeeSwitchCase();
-  } else if (choice == 5) {
-    employeeWageForMonth();
-  } else if (choice == 6) {
-    employeeWageForMonthWithCondition();
-  }
+employeeList[0] = new Employee(101, "sam", "Comm");
+employeeList[1] = new Employee(102, "adam", "Telmn");
+employeeList[2] = new Employee(103, "roger", "Comm");
+employeeList[3] = new Employee(104, "monte", "Telmn");
+employeeList[4] = new Employee(102, "kassing", "Comm");
+
+for (let employee of employeeList) {
+  employee.employeeAttendence();
+  employee.employeeDailyWage();
+  employee.addPartTimeEmployee();
+  employee.addPartTimeEmployeeSwitchCase();
+  employee.employeeWageForMonth();
+  employee.employeeWageForMonthWithCondition();
 }
-menuDisplay();
